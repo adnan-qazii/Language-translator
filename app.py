@@ -1,4 +1,4 @@
-from flask import Flask , render_template, request
+from flask import Flask , render_template, request 
 from dotenv import load_dotenv
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_groq import ChatGroq
@@ -29,9 +29,15 @@ def home():
 
 
 
+
 @app.route('/translate', methods=['POST'])
 def translate():
     text = request.form['text']
     language = request.form['language']
     result = chain.invoke({"text": text, "language": language})
-    return render_template('index.html', result=result)
+    return render_template('translate.html', result=result)
+
+
+
+if __name__ == '__main__':
+    app.run(debug=True, use_reloader=True)

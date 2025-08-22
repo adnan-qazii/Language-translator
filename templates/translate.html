@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Translate | Language Translator</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
+            color: #222;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: rgba(255,255,255,0.97);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+            padding: 40px 30px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            color: #185a9d;
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+        label {
+            font-weight: bold;
+            color: #43cea2;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+            font-size: 1.1em;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #43cea2;
+            background: #f7f7f7;
+        }
+        select {
+            padding: 8px;
+            border-radius: 10px;
+            border: 1px solid #185a9d;
+            background: #e3f6f5;
+            font-size: 1em;
+        }
+        .btn {
+            padding: 14px 0;
+            background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
+            color: #fff;
+            font-size: 1.2em;
+            font-weight: bold;
+            border: none;
+            border-radius: 30px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.09);
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: linear-gradient(90deg, #185a9d 0%, #43cea2 100%);
+        }
+        .result {
+            margin-top: 30px;
+            background: #43cea2;
+            color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            font-size: 1.2em;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #185a9d;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link:hover {
+            color: #43cea2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Translate Text</h1>
+        <form method="POST" action="/translate">
+            <label for="text">Text to Translate:</label>
+            <textarea id="text" name="text" required></textarea>
+            <label for="source_lang">Source Language:</label>
+            <select id="source_lang" name="source_lang" required>
+                <option value="en">English</option>
+                <option value="es">Spanish</option>
+                <option value="fr">French</option>
+                <option value="de">German</option>
+                <option value="hi">Hindi</option>
+                <option value="zh-cn">Chinese</option>
+                <!-- Add more languages as needed -->
+            </select>
+            <label for="target_lang">Target Language:</label>
+            <select id="target_lang" name="target_lang" required>
+                <option value="en">English</option>
+                <option value="es">Spanish</option>
+                <option value="fr">French</option>
+                <option value="de">German</option>
+                <option value="hi">Hindi</option>
+                <option value="zh-cn">Chinese</option>
+                <!-- Add more languages as needed -->
+            </select>
+            <button type="submit" class="btn">Translate</button>
+        </form>
+        {% if translated_text %}
+        <div class="result">
+            <strong>Translated Text:</strong><br>
+            {{ translated_text }}
+        </div>
+        {% endif %}
+        <a href="/" class="back-link">&#8592; Back to Home</a>
+    </div>
+</body>
+</html>
