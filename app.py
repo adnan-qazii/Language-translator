@@ -30,12 +30,17 @@ def home():
 
 
 
-@app.route('/translate', methods=['POST'])
+@app.route('/translate', methods=['POST', 'GET'])
 def translate():
-    text = request.form['text']
-    language = request.form['language']
-    result = chain.invoke({"text": text, "language": language})
-    return render_template('translate.html', result=result)
+    translated_text = None
+    if request.method == 'POST':
+        text = request.form.get('text')
+        source_lang = request.form.get('source_lang')
+        target_lang = request.form.get('target_lang')
+        # Use target_lang for translation
+        if text and target_lang:
+            translated_text = chain.invoke({"text": text, "language": target_lang})
+    return render_template('translate.html', translated_text=translated_text)
 
 
 
